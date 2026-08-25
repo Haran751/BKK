@@ -1,6 +1,7 @@
 import React from 'react';
-import { Phone, MessageCircle, Globe, MapPin, Mail, ShieldCheck, Heart } from 'lucide-react';
+import { Phone, MessageCircle, Globe, MapPin, Mail, ShieldCheck, Heart, Lock } from 'lucide-react';
 import { schoolInfo } from '../data/mockData';
+import logoSmkn20 from '../assets/logo-smkn20jkt.webp';
 
 // Clean SVG Icons for Socials
 const FacebookIcon = ({ className = "w-4 h-4" }) => (
@@ -27,7 +28,7 @@ const LinkedinIcon = ({ className = "w-4 h-4" }) => (
   </svg>
 );
 
-export default function Footer({ onOpenTracerModal, onOpenAboutModal }) {
+export default function Footer({ onOpenTracerModal, onOpenAboutModal, onOpenAuth, currentUser }) {
   return (
     <footer className="bg-[#0a192f] text-slate-300 pt-12 pb-8 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -144,15 +145,17 @@ export default function Footer({ onOpenTracerModal, onOpenAboutModal }) {
 
           {/* COLUMN 4: SCHOOL */}
           <div>
-            <h4 className="text-sm font-black text-white uppercase tracking-wider mb-4 font-display">
-              SCHOOL
-            </h4>
+            <div className="flex items-center gap-2.5 mb-3">
+              <div className="w-8 h-8 rounded-full bg-white p-0.5 overflow-hidden flex items-center justify-center shrink-0">
+                <img src={logoSmkn20} alt="Logo SMKN 20 Jakarta" className="w-full h-full object-contain" />
+              </div>
+              <h4 className="text-sm font-black text-white uppercase tracking-wider font-display">
+                SMK NEGERI 20 JAKARTA
+              </h4>
+            </div>
             <div className="space-y-2 text-slate-400">
-              <p className="font-extrabold text-white text-sm">
-                SMK NEGERI 1 JAKARTA
-              </p>
               <p className="text-xs">
-                Sekolah Menengah Kejuruan Pusat Keunggulan (SMK PK) Bidang Teknologi & Rekayasa, Teknologi Informasi, serta Bisnis Manajemen.
+                Sekolah Menengah Kejuruan Pusat Keunggulan (SMK PK) Bidang Bisnis & Manajemen, Akuntansi, Rekayasa Perangkat Lunak, dan Desain Komunikasi Visual.
               </p>
               <div className="pt-2 flex flex-col gap-1 text-[11px]">
                 <div className="flex items-center gap-1 text-emerald-400 font-bold">
@@ -172,12 +175,21 @@ export default function Footer({ onOpenTracerModal, onOpenAboutModal }) {
           <div>
             <p>© 2024 Bursa Kerja Khusus (BKK) SMK Negeri 1 Jakarta. All rights reserved.</p>
           </div>
-          <div className="flex items-center gap-4 text-slate-400">
+          <div className="flex flex-wrap items-center gap-4 text-slate-400">
             <button onClick={onOpenAboutModal} className="hover:text-white transition-colors">Visi & Misi</button>
             <span>•</span>
             <button onClick={onOpenTracerModal} className="hover:text-white transition-colors">Tracer Study</button>
             <span>•</span>
             <a href="#lowongan" className="hover:text-white transition-colors">Info Loker</a>
+            <span>•</span>
+            <button
+              onClick={onOpenAuth}
+              className="text-slate-500 hover:text-amber-400 transition-colors inline-flex items-center gap-1 cursor-pointer font-medium"
+              title="Akses Khusus Pengelola & Administrator BKK"
+            >
+              <Lock className="w-3 h-3 text-slate-500" />
+              <span>{currentUser ? 'Admin BKK Aktif' : 'Akses Admin'}</span>
+            </button>
           </div>
         </div>
 

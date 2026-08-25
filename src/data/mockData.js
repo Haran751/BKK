@@ -681,6 +681,6 @@ export const bkkFaqs = [
   },
   {
     q: "Bagaimana perusahaan dapat bermitra dan memasang lowongan di BKK?",
-    a: "Perusahaan dapat mendaftarkan akun melalui menu 'Login/Daftar' -> 'Mitra Perusahaan' atau mengisi formulir 'Pasang Lowongan'. Tim BKK akan memverifikasi legalitas perusahaan dalam 1x24 jam kerja sebelum lowongan diterbitkan."
+    a: "Perusahaan atau Mitra DUDI dapat mengirimkan informasi lowongan kerja resmi melalui email humas BKK (bkk@smkn1jakarta.sch.id) atau WhatsApp resmi. Tim Administrator BKK akan memverifikasi dan mempublikasikannya langsung ke portal."
   }
 ];

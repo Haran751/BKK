@@ -1,49 +1,34 @@
 import React, { useState } from 'react';
-import { X, User, Lock, Mail, Building, ShieldCheck, CheckCircle2, ArrowRight, Sparkles, Key } from 'lucide-react';
+import { X, Lock, Mail, ShieldCheck, Sparkles, Key, AlertCircle } from 'lucide-react';
 
 export default function AuthModal({ onClose, onLoginSuccess }) {
-  const [isLogin, setIsLogin] = useState(true);
-  const [role, setRole] = useState('siswa'); // 'siswa' | 'perusahaan' | 'admin'
-
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
-    password: '',
-    nisnOrNip: '',
-    companyName: ''
+    password: ''
   });
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.email || !formData.password) {
+      setError('Harap masukkan email/username dan password administrator.');
+      return;
+    }
+
     const userObj = {
-      name: formData.name || (role === 'siswa' ? 'Ahmad Rizky Pratama' : role === 'perusahaan' ? 'HRD PT Astra International' : 'Admin BKK SMKN 1'),
-      email: formData.email || (role === 'siswa' ? 'siswa@smkn1jakarta.sch.id' : role === 'perusahaan' ? 'hrd@astra.co.id' : 'admin.bkk@smkn1jakarta.sch.id'),
-      role: role === 'siswa' ? 'Alumni / Siswa' : role === 'perusahaan' ? 'Mitra Industri' : 'Administrator BKK'
+      name: formData.email.includes('@') ? formData.email.split('@')[0] : 'Administrator BKK',
+      email: formData.email,
+      role: 'Administrator BKK'
     };
     if (onLoginSuccess) onLoginSuccess(userObj);
   };
 
-  const handleDemoLogin = (demoRole) => {
-    let userObj;
-    if (demoRole === 'siswa') {
-      userObj = {
-        name: 'Ahmad Rizky Pratama (Alumni TKJ)',
-        email: 'ahmad.rizky@gmail.com',
-        role: 'Alumni / Siswa'
-      };
-    } else if (demoRole === 'perusahaan') {
-      userObj = {
-        name: 'HRD PT Astra International Tbk',
-        email: 'recruitment@astra.co.id',
-        role: 'Mitra Industri'
-      };
-    } else {
-      userObj = {
-        name: 'Drs. H. Hendra, M.Pd (Ketua BKK)',
-        email: 'admin.bkk@smkn1jakarta.sch.id',
-        role: 'Administrator BKK'
-      };
-    }
+  const handleDemoAdminLogin = () => {
+    const userObj = {
+      name: 'Drs. H. Hendra, M.Pd (Ketua BKK)',
+      email: 'admin.bkk@smkn1jakarta.sch.id',
+      role: 'Administrator BKK'
+    };
     if (onLoginSuccess) onLoginSuccess(userObj);
   };
 
@@ -52,7 +37,7 @@ export default function AuthModal({ onClose, onLoginSuccess }) {
       <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-slate-100 relative my-8 overflow-hidden">
         
         {/* Header */}
-        <div className="bg-gradient-to-r from-bkk-navy to-bkk-blue text-white p-6 relative">
+        <div className="bg-gradient-to-r from-[#0a192f] via-bkk-navy to-bkk-blue text-white p-6 relative">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 text-white/80 hover:text-white bg-black/20 hover:bg-black/40 w-8 h-8 rounded-full flex items-center justify-center transition-colors"
@@ -60,130 +45,65 @@ export default function AuthModal({ onClose, onLoginSuccess }) {
             <X className="w-5 h-5" />
           </button>
 
-          <p className="text-[11px] font-extrabold text-orange-400 uppercase tracking-widest">
-            Portal Layanan BKK SMKN 1
-          </p>
-          <h3 className="text-xl font-black text-white font-display mt-0.5">
-            {isLogin ? 'Masuk ke Akun Anda' : 'Buat Akun Baru'}
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="p-1.5 rounded-lg bg-orange-500/20 text-orange-400 border border-orange-400/30">
+              <ShieldCheck className="w-4 h-4" />
+            </span>
+            <p className="text-[11px] font-black text-orange-400 uppercase tracking-widest">
+              Portal Khusus Administrator
+            </p>
+          </div>
+          <h3 className="text-xl font-black text-white font-display">
+            Login Pengelola BKK
           </h3>
           <p className="text-xs text-slate-200 mt-1">
-            Akses lowongan kerja, campus hiring, dan tracer study
+            Masuk untuk mempublikasikan lowongan kerja baru dan mengelola data BKK SMKN 1 Jakarta
           </p>
-        </div>
-
-        {/* Role Selector Tabs */}
-        <div className="p-4 bg-slate-50 border-b border-slate-200">
-          <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2 text-center">
-            Pilih Jenis Pengguna:
-          </p>
-          <div className="grid grid-cols-3 gap-1.5 bg-slate-200/70 p-1 rounded-xl">
-            <button
-              onClick={() => setRole('siswa')}
-              className={`py-1.5 px-2 rounded-lg text-xs font-bold transition-all truncate ${
-                role === 'siswa' ? 'bg-white text-bkk-navy shadow-sm' : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              Siswa/Alumni
-            </button>
-            <button
-              onClick={() => setRole('perusahaan')}
-              className={`py-1.5 px-2 rounded-lg text-xs font-bold transition-all truncate ${
-                role === 'perusahaan' ? 'bg-white text-bkk-navy shadow-sm' : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              Perusahaan
-            </button>
-            <button
-              onClick={() => setRole('admin')}
-              className={`py-1.5 px-2 rounded-lg text-xs font-bold transition-all truncate ${
-                role === 'admin' ? 'bg-white text-bkk-navy shadow-sm' : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              Admin BKK
-            </button>
-          </div>
         </div>
 
         {/* Form Body */}
         <div className="p-6">
           
-          {/* 1-Click Demo Login Banner */}
+          {/* Quick Demo Button for easy testing */}
           <div className="mb-5 p-3 rounded-2xl bg-amber-50 border border-amber-200 text-slate-800">
-            <div className="flex items-center gap-1.5 text-xs font-black text-amber-800 mb-1.5">
-              <Sparkles className="w-4 h-4 text-amber-600" />
-              <span>Akses Cepat (Demo Testing):</span>
+            <div className="flex items-center justify-between gap-2 mb-2">
+              <div className="flex items-center gap-1.5 text-xs font-black text-amber-900">
+                <Sparkles className="w-4 h-4 text-amber-600" />
+                <span>Akses Cepat (Demo Testing):</span>
+              </div>
+              <span className="text-[10px] text-amber-700 bg-amber-200/60 px-2 py-0.5 rounded-full font-bold">
+                1-Klik
+              </span>
             </div>
-            <div className="grid grid-cols-3 gap-1.5">
-              <button
-                type="button"
-                onClick={() => handleDemoLogin('siswa')}
-                className="py-1 px-1.5 rounded-lg bg-white border border-amber-300 text-[10px] font-bold text-amber-900 hover:bg-amber-100 transition-colors truncate"
-              >
-                Demo Siswa
-              </button>
-              <button
-                type="button"
-                onClick={() => handleDemoLogin('perusahaan')}
-                className="py-1 px-1.5 rounded-lg bg-white border border-amber-300 text-[10px] font-bold text-amber-900 hover:bg-amber-100 transition-colors truncate"
-              >
-                Demo HRD
-              </button>
-              <button
-                type="button"
-                onClick={() => handleDemoLogin('admin')}
-                className="py-1 px-1.5 rounded-lg bg-white border border-amber-300 text-[10px] font-bold text-amber-900 hover:bg-amber-100 transition-colors truncate"
-              >
-                Demo Admin
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={handleDemoAdminLogin}
+              className="w-full py-2 px-3 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition-colors flex items-center justify-center gap-2 shadow-sm"
+            >
+              <Key className="w-3.5 h-3.5" />
+              <span>Masuk sebagai Administrator BKK (Demo)</span>
+            </button>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-3 text-xs">
-            {!isLogin && (
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">Nama Lengkap *</label>
-                <div className="relative">
-                  <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="text"
-                    required
-                    placeholder="Nama lengkap Anda"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bkk-blue/20 focus:border-bkk-blue text-xs"
-                  />
-                </div>
-              </div>
-            )}
+          {error && (
+            <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              <span>{error}</span>
+            </div>
+          )}
 
-            {role === 'perusahaan' && !isLogin && (
-              <div>
-                <label className="font-bold text-slate-700 block mb-1">Nama Perusahaan / PT *</label>
-                <div className="relative">
-                  <Building className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                  <input
-                    type="text"
-                    required
-                    placeholder="Contoh: PT Astra International Tbk"
-                    value={formData.companyName}
-                    onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-                    className="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bkk-blue/20 focus:border-bkk-blue text-xs"
-                  />
-                </div>
-              </div>
-            )}
-
+          <form onSubmit={handleSubmit} className="space-y-3.5 text-xs">
             <div>
-              <label className="font-bold text-slate-700 block mb-1">Email / Username *</label>
+              <label className="font-bold text-slate-700 block mb-1">Email / Username Administrator *</label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
-                  type="email"
+                  type="text"
                   required
-                  placeholder={role === 'siswa' ? 'nisn@smkn1jakarta.sch.id' : 'email@perusahaan.com'}
+                  placeholder="admin.bkk@smkn1jakarta.sch.id"
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bkk-blue/20 focus:border-bkk-blue text-xs"
+                  onChange={(e) => { setFormData({ ...formData, email: e.target.value }); setError(''); }}
+                  className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bkk-blue/20 focus:border-bkk-blue text-xs"
                 />
               </div>
             </div>
@@ -191,14 +111,14 @@ export default function AuthModal({ onClose, onLoginSuccess }) {
             <div>
               <label className="font-bold text-slate-700 block mb-1">Kata Sandi (Password) *</label>
               <div className="relative">
-                <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="password"
                   required
                   placeholder="••••••••"
                   value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="w-full pl-9 pr-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bkk-blue/20 focus:border-bkk-blue text-xs"
+                  onChange={(e) => { setFormData({ ...formData, password: e.target.value }); setError(''); }}
+                  className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bkk-blue/20 focus:border-bkk-blue text-xs"
                 />
               </div>
             </div>
@@ -206,36 +126,18 @@ export default function AuthModal({ onClose, onLoginSuccess }) {
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-bkk-navy hover:bg-bkk-blue text-white font-extrabold text-xs uppercase tracking-wider shadow-button-blue transition-all"
+                className="w-full py-3 rounded-xl bg-[#133e75] hover:bg-[#0c2b53] text-white font-extrabold text-xs uppercase tracking-wider shadow-button-blue transition-all flex items-center justify-center gap-2"
               >
-                {isLogin ? `Masuk sebagai ${role === 'siswa' ? 'Siswa' : role === 'perusahaan' ? 'Perusahaan' : 'Admin'}` : 'Daftar Akun Sekarang'}
+                <ShieldCheck className="w-4 h-4" />
+                <span>Masuk sebagai Administrator</span>
               </button>
             </div>
           </form>
 
-          {/* Toggle between Login and Register */}
-          <div className="mt-5 pt-4 border-t border-slate-100 text-center text-xs text-slate-500">
-            {isLogin ? (
-              <p>
-                Belum memiliki akun?{' '}
-                <button
-                  onClick={() => setIsLogin(false)}
-                  className="text-bkk-orange font-bold hover:underline"
-                >
-                  Daftar Akun BKK
-                </button>
-              </p>
-            ) : (
-              <p>
-                Sudah memiliki akun?{' '}
-                <button
-                  onClick={() => setIsLogin(true)}
-                  className="text-bkk-blue font-bold hover:underline"
-                >
-                  Masuk di sini
-                </button>
-              </p>
-            )}
+          <div className="mt-4 text-center">
+            <p className="text-[11px] text-slate-400">
+              Halaman ini terproteksi khusus untuk dewan pengelola BKK SMKN 1 Jakarta.
+            </p>
           </div>
         </div>
 

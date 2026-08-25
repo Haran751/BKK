@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Menu, X, User, LogOut, Briefcase, Bell, ChevronDown } from 'lucide-react';
+import { Search, Menu, X, User, LogOut, Briefcase, Bell, ChevronDown, PlusCircle, ShieldCheck } from 'lucide-react';
+import logoSmkn20 from '../assets/logo-smkn20jkt.webp';
 
 export default function Navbar({
   activeSection,
   setActiveSection,
-  onOpenAuth,
   currentUser,
   onLogout,
   onSearch,
   searchQuery,
   setSearchQuery,
   onOpenAboutModal,
-  onOpenTrackerModal
+  onOpenTrackerModal,
+  onOpenPostJobModal
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -72,24 +73,18 @@ export default function Navbar({
             className="flex items-center gap-3 group shrink-0"
           >
             {/* School Crest Emblem */}
-            <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-gradient-to-br from-bkk-blue via-bkk-lightBlue to-bkk-navy p-0.5 shadow-sm group-hover:scale-105 transition-transform">
-              <div className="w-full h-full rounded-full bg-white flex items-center justify-center p-1 overflow-hidden relative">
-                {/* SVG School Emblem */}
-                <svg viewBox="0 0 100 100" className="w-full h-full">
-                  <polygon points="50,4 95,24 95,76 50,96 5,76 5,24" fill="#133e75" />
-                  <polygon points="50,12 87,28 87,72 50,88 13,72 13,28" fill="#ffffff" />
-                  <circle cx="50" cy="50" r="26" fill="#f97316" opacity="0.9" />
-                  <path d="M 36 62 L 50 34 L 64 62 L 56 62 L 50 48 L 44 62 Z" fill="#ffffff" />
-                  <circle cx="50" cy="30" r="4" fill="#ffffff" />
-                  <path d="M 28 44 Q 50 38 72 44" stroke="#ffffff" strokeWidth="2.5" fill="none" />
-                </svg>
-              </div>
+            <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-white p-1 shadow-sm border border-slate-200 group-hover:scale-105 transition-transform flex items-center justify-center overflow-hidden shrink-0">
+              <img
+                src={logoSmkn20}
+                alt="Logo SMKN 20 Jakarta"
+                className="w-full h-full object-contain"
+              />
             </div>
 
             {/* School Text */}
             <div className="flex flex-col">
               <span className="font-extrabold text-[15px] sm:text-[17px] tracking-tight text-bkk-navy leading-tight uppercase font-sans">
-                SMK NEGERI 1 JAKARTA
+                SMK NEGERI 20 JAKARTA
               </span>
               <span className="font-black text-lg sm:text-xl text-bkk-blue tracking-widest leading-none font-display">
                 BKK
@@ -117,7 +112,7 @@ export default function Navbar({
             })}
           </nav>
 
-          {/* Right Action Icons & Login Button */}
+          {/* Right Action Icons */}
           <div className="flex items-center gap-2 sm:gap-3">
             
             {/* Interactive Search Bar / Trigger */}
@@ -155,60 +150,66 @@ export default function Navbar({
             {/* Application Tracker Quick Button */}
             <button
               onClick={onOpenTrackerModal}
-              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-bkk-blue bg-bkk-sky/60 hover:bg-bkk-sky rounded-full transition-colors"
+              className="hidden lg:flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-bkk-blue bg-bkk-sky/60 hover:bg-bkk-sky rounded-full transition-colors"
               title="Cek Status Lamaran Saya"
             >
               <Briefcase className="w-3.5 h-3.5" />
               <span>Cek Lamaran</span>
             </button>
 
-            {/* User Profile or Login/Daftar Button */}
-            {currentUser ? (
+            {/* Admin Profile & Actions (Only visible when Admin is Logged In) */}
+            {currentUser && (
               <div className="relative">
                 <button
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-bkk-navy text-white text-xs sm:text-sm font-semibold hover:bg-bkk-blue transition-colors shadow-sm"
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#133e75] text-white text-xs sm:text-sm font-semibold hover:bg-bkk-blue transition-colors shadow-sm"
                 >
                   <div className="w-6 h-6 rounded-full bg-bkk-orange flex items-center justify-center font-bold text-white text-xs">
-                    {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U'}
+                    <ShieldCheck className="w-3.5 h-3.5" />
                   </div>
-                  <span className="max-w-[90px] truncate">{currentUser.name}</span>
+                  <span className="max-w-[100px] truncate">{currentUser.name}</span>
                   <ChevronDown className="w-3.5 h-3.5 opacity-80" />
                 </button>
 
                 {userDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50">
-                    <div className="px-4 py-2 border-b border-slate-100">
-                      <p className="text-xs text-slate-500 font-medium">Masuk sebagai</p>
-                      <p className="text-sm font-bold text-slate-900 truncate">{currentUser.name}</p>
-                      <span className="inline-block mt-1 px-2 py-0.5 text-[10px] font-bold rounded-full bg-orange-100 text-bkk-orange uppercase">
-                        {currentUser.role}
+                  <div className="absolute right-0 mt-2 w-60 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 z-50 animate-fadeIn">
+                    <div className="px-4 py-2.5 border-b border-slate-100">
+                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Status Akses</p>
+                      <p className="text-sm font-bold text-slate-900 truncate mt-0.5">{currentUser.name}</p>
+                      <span className="inline-flex items-center gap-1 mt-1 px-2 py-0.5 text-[10px] font-black rounded-full bg-orange-100 text-bkk-orange uppercase">
+                        <ShieldCheck className="w-3 h-3" />
+                        <span>{currentUser.role}</span>
                       </span>
                     </div>
+
+                    {onOpenPostJobModal && (
+                      <button
+                        onClick={() => { setUserDropdownOpen(false); onOpenPostJobModal(); }}
+                        className="w-full text-left px-4 py-2.5 text-xs font-bold text-emerald-700 hover:bg-emerald-50 flex items-center gap-2"
+                      >
+                        <PlusCircle className="w-4 h-4 text-emerald-600" />
+                        <span>+ Pasang Lowongan Baru</span>
+                      </button>
+                    )}
+
                     <button
                       onClick={() => { setUserDropdownOpen(false); onOpenTrackerModal(); }}
                       className="w-full text-left px-4 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50 flex items-center gap-2"
                     >
                       <Briefcase className="w-4 h-4 text-bkk-blue" />
-                      Status Lamaran Saya
+                      <span>Status Lamaran Masuk</span>
                     </button>
+
                     <button
                       onClick={() => { setUserDropdownOpen(false); onLogout(); }}
-                      className="w-full text-left px-4 py-2 text-xs font-medium text-red-600 hover:bg-red-50 flex items-center gap-2 border-t border-slate-100"
+                      className="w-full text-left px-4 py-2.5 text-xs font-bold text-red-600 hover:bg-red-50 flex items-center gap-2 border-t border-slate-100"
                     >
                       <LogOut className="w-4 h-4 text-red-500" />
-                      Keluar (Logout)
+                      <span>Keluar (Logout Admin)</span>
                     </button>
                   </div>
                 )}
               </div>
-            ) : (
-              <button
-                onClick={onOpenAuth}
-                className="px-5 sm:px-6 py-2 rounded-full bg-[#133e75] hover:bg-[#0c2b53] text-white font-extrabold text-xs sm:text-sm tracking-wider uppercase transition-all shadow-button-blue hover:shadow-lg active:scale-95"
-              >
-                LOGIN/DAFTAR
-              </button>
             )}
 
             {/* Mobile Hamburger Toggle Button */}
@@ -242,11 +243,32 @@ export default function Navbar({
             <div className="pt-2 px-2 flex flex-col gap-2">
               <button
                 onClick={() => { setMobileMenuOpen(false); onOpenTrackerModal(); }}
-                className="w-full py-2 px-4 rounded-lg bg-bkk-sky text-bkk-blue font-bold text-xs flex items-center justify-center gap-2"
+                className="w-full py-2.5 px-4 rounded-lg bg-bkk-sky text-bkk-blue font-bold text-xs flex items-center justify-center gap-2"
               >
                 <Briefcase className="w-4 h-4" />
                 Cek Status Lamaran Kerja
               </button>
+
+              {currentUser && (
+                <>
+                  {onOpenPostJobModal && (
+                    <button
+                      onClick={() => { setMobileMenuOpen(false); onOpenPostJobModal(); }}
+                      className="w-full py-2.5 px-4 rounded-lg bg-emerald-600 text-white font-bold text-xs flex items-center justify-center gap-2"
+                    >
+                      <PlusCircle className="w-4 h-4" />
+                      + Pasang Lowongan (Admin)
+                    </button>
+                  )}
+                  <button
+                    onClick={() => { setMobileMenuOpen(false); onLogout(); }}
+                    className="w-full py-2 px-4 rounded-lg bg-red-50 text-red-600 font-bold text-xs flex items-center justify-center gap-2"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Keluar ({currentUser.name})
+                  </button>
+                </>
+              )}
             </div>
           </div>
         )}

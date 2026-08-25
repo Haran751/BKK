@@ -22,6 +22,7 @@ import PostJobModal from './components/Modals/PostJobModal';
 import AboutBkkModal from './components/Modals/AboutBkkModal';
 import ApplicationTrackerModal from './components/Modals/ApplicationTrackerModal';
 import Toast from './components/Toast';
+import { jobVacancies } from './data/mockData';
 
 import { MessageCircle, ArrowUp } from 'lucide-react';
 
@@ -29,6 +30,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('beranda');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
+  const [jobsList, setJobsList] = useState(jobVacancies);
   const [toastMessage, setToastMessage] = useState(null);
 
   // Modal States
@@ -51,12 +53,12 @@ export default function App() {
   const handleLoginSuccess = (user) => {
     setCurrentUser(user);
     setIsAuthOpen(false);
-    showToast(`Selamat datang, ${user.name}!`);
+    showToast(`Selamat datang, ${user.name}! (Mode Administrator Aktif)`);
   };
 
   const handleLogout = () => {
     setCurrentUser(null);
-    showToast('Anda telah keluar dari akun.', 'info');
+    showToast('Anda telah keluar dari sesi administrator.', 'info');
   };
 
   const handleJobApplicationSuccess = (record) => {
@@ -64,7 +66,8 @@ export default function App() {
   };
 
   const handleJobPosted = (newJob) => {
-    showToast(`Lowongan "${newJob.title}" berhasil diajukan untuk verifikasi.`);
+    setJobsList((prev) => [newJob, ...prev]);
+    showToast(`Lowongan "${newJob.title}" berhasil dipublikasikan!`);
   };
 
   const scrollToSection = (sectionId) => {
@@ -84,13 +87,13 @@ export default function App() {
       <Navbar
         activeSection={activeSection}
         setActiveSection={setActiveSection}
-        onOpenAuth={() => setIsAuthOpen(true)}
         currentUser={currentUser}
         onLogout={handleLogout}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         onOpenAboutModal={() => setIsAboutOpen(true)}
         onOpenTrackerModal={() => setIsTrackerOpen(true)}
+        onOpenPostJobModal={() => setIsPostJobOpen(true)}
       />
 
       {/* Main Landing Page Flow */}
@@ -128,6 +131,8 @@ export default function App() {
 
         {/* Lowongan Kerja Terbaru */}
         <LowonganKerja
+          jobs={jobsList}
+          currentUser={currentUser}
           onSelectJob={(job) => setSelectedJob(job)}
           onApplyJob={(job) => setApplyingJob(job)}
           onOpenPostJobModal={() => setIsPostJobOpen(true)}
@@ -153,6 +158,8 @@ export default function App() {
       <Footer
         onOpenTracerModal={() => setIsTracerOpen(true)}
         onOpenAboutModal={() => setIsAboutOpen(true)}
+        onOpenAuth={() => setIsAuthOpen(true)}
+        currentUser={currentUser}
       />
 
       {/* Floating Action Buttons */}

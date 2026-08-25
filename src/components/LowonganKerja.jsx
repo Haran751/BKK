@@ -1,9 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import { Search, MapPin, Briefcase, Clock, DollarSign, ChevronRight, Filter, Building2, Send, PlusCircle } from 'lucide-react';
+import { Search, MapPin, Briefcase, Clock, DollarSign, ChevronRight, Filter, Building2, Send, PlusCircle, ShieldCheck } from 'lucide-react';
 import { jobVacancies } from '../data/mockData';
 import CompanyLogo from './CompanyLogo';
 
 export default function LowonganKerja({
+  jobs = jobVacancies,
+  currentUser,
   onSelectJob,
   onApplyJob,
   onOpenPostJobModal,
@@ -23,7 +25,7 @@ export default function LowonganKerja({
   ];
 
   const filteredJobs = useMemo(() => {
-    return jobVacancies.filter(job => {
+    return jobs.filter(job => {
       const q = (searchQuery || internalSearch).toLowerCase();
       const matchQuery = !q || 
         job.title.toLowerCase().includes(q) || 
@@ -41,7 +43,7 @@ export default function LowonganKerja({
 
       return matchQuery && matchCategory;
     });
-  }, [searchQuery, internalSearch, selectedCategory]);
+  }, [jobs, searchQuery, internalSearch, selectedCategory]);
 
   return (
     <section id="lowongan" className="py-12 md:py-16 bg-[#f8fafc]">
@@ -59,16 +61,18 @@ export default function LowonganKerja({
             </p>
           </div>
 
-          {/* Action: Post Job for Companies */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onOpenPostJobModal}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-slate-300 hover:border-bkk-blue text-bkk-navy hover:text-bkk-blue text-xs sm:text-sm font-bold shadow-sm transition-all"
-            >
-              <PlusCircle className="w-4 h-4 text-bkk-orange" />
-              <span>Pasang Lowongan (Mitra DUDI)</span>
-            </button>
-          </div>
+          {/* Action: Post Job ONLY available for logged in Admin */}
+          {currentUser && (
+            <div className="flex items-center gap-2">
+              <button
+                onClick={onOpenPostJobModal}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#133e75] hover:bg-[#0c2b53] text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all cursor-pointer"
+              >
+                <PlusCircle className="w-4 h-4 text-bkk-orange" />
+                <span>+ Tambah Lowongan (Admin)</span>
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Filter & Search Bar */}
