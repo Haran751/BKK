@@ -20,7 +20,7 @@ export default function AboutBkkModal({ onClose }) {
             Profil Lembaga
           </span>
           <h2 className="text-xl sm:text-2xl font-black text-white font-display mt-2 uppercase">
-            BURSA KERJA KHUSUS (BKK)<br />SMK NEGERI 1 JAKARTA
+            BURSA KERJA KHUSUS (BKK)<br />SMK NEGERI 20 JAKARTA
           </h2>
           <p className="text-xs sm:text-sm text-slate-200 mt-1">
             Menghubungkan Potensi Kejuruan dengan Peluang Karir Nyata di Industri Global
@@ -34,10 +34,10 @@ export default function AboutBkkModal({ onClose }) {
           <div>
             <h3 className="text-base font-black text-slate-900 uppercase tracking-tight font-display mb-2 flex items-center gap-2">
               <Building className="w-5 h-5 text-bkk-orange" />
-              <span>Tentang BKK SMKN 1 Jakarta</span>
+              <span>Tentang BKK SMKN 20 Jakarta</span>
             </h3>
             <p className="text-slate-600 bg-slate-50 p-4 rounded-2xl border border-slate-100 leading-relaxed">
-              Bursa Kerja Khusus (BKK) SMK Negeri 1 Jakarta adalah unit kelembagaan resmi di bawah naungan Dinas Pendidikan DKI Jakarta dan Kementerian Ketenagakerjaan RI yang dibentuk sebagai wadah pelayanan informasi ketenagakerjaan, bimbingan karir, pembinaan kompetensi, serta penyaluran dan penempatan lulusan ke dunia usaha dan dunia industri (DUDI).
+              Bursa Kerja Khusus (BKK) SMK Negeri 20 Jakarta adalah unit kelembagaan resmi di bawah naungan Dinas Pendidikan DKI Jakarta dan Kementerian Ketenagakerjaan RI yang dibentuk sebagai wadah pelayanan informasi ketenagakerjaan, bimbingan karir, pembinaan kompetensi, serta penyaluran dan penempatan lulusan ke dunia usaha dan dunia industri (DUDI).
             </p>
           </div>
 
@@ -79,12 +79,12 @@ export default function AboutBkkModal({ onClose }) {
           <div>
             <h3 className="text-base font-black text-slate-900 uppercase tracking-tight font-display mb-3 flex items-center gap-2">
               <Users className="w-5 h-5 text-bkk-orange" />
-              <span>Struktur Pengelola BKK SMKN 1 Jakarta</span>
+              <span>Struktur Pengelola BKK SMKN 20 Jakarta</span>
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl text-center">
                 <p className="text-[10px] text-slate-400 font-bold uppercase">Penanggung Jawab</p>
-                <p className="font-extrabold text-slate-900 text-xs mt-0.5">Kepala SMKN 1 Jakarta</p>
+                <p className="font-extrabold text-slate-900 text-xs mt-0.5">Kepala SMKN 20 Jakarta</p>
               </div>
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl text-center">
                 <p className="text-[10px] text-slate-400 font-bold uppercase">Ketua BKK</p>

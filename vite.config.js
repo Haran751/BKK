@@ -7,6 +7,10 @@ export default defineConfig({
   server: {
     port: 3000,
     open: false,
-    host: true
+    host: true,
+    proxy: {
+      '/api': 'http://127.0.0.1:5001',
+      '/uploads': 'http://127.0.0.1:5001'
+    }
   }
 })

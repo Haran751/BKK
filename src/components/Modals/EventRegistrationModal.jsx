@@ -10,7 +10,7 @@ export default function EventRegistrationModal({ eventId = 'job-fair-2024', onCl
     name: 'Ahmad Rizky Pratama',
     email: 'ahmad.rizky@gmail.com',
     phone: '081234567890',
-    institution: 'Alumni SMKN 1 Jakarta (TKJ)',
+    institution: 'Alumni SMKN 20 Jakarta (AK)',
     ticketCode: 'TKT-JF24-' + Math.floor(1000 + Math.random() * 9000),
     session: 'Sesi Pagi (08.30 - 12.00 WIB)'
   });
@@ -45,7 +45,7 @@ export default function EventRegistrationModal({ eventId = 'job-fair-2024', onCl
             <span className="px-2.5 py-0.5 rounded-full bg-bkk-orange text-white text-[10px] font-black uppercase">
               {event.type}
             </span>
-            <span className="text-xs text-slate-200">BKK SMKN 1 Jakarta</span>
+            <span className="text-xs text-slate-200">BKK SMKN 20 Jakarta</span>
           </div>
 
           <h3 className="text-lg sm:text-xl font-black text-white font-display leading-tight uppercase">
@@ -110,7 +110,7 @@ export default function EventRegistrationModal({ eventId = 'job-fair-2024', onCl
                   </div>
                   <div>
                     <span className="text-[10px] text-slate-400 block">LOKASI</span>
-                    <span className="font-bold text-white">SMKN 1 Jakarta</span>
+                    <span className="font-bold text-white">SMKN 20 Jakarta</span>
                   </div>
                 </div>
 
@@ -208,8 +208,8 @@ export default function EventRegistrationModal({ eventId = 'job-fair-2024', onCl
                   onChange={(e) => setTicketData({ ...ticketData, institution: e.target.value })}
                   className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bkk-blue/20 focus:border-bkk-blue text-xs bg-white"
                 >
-                  <option value="Alumni SMKN 1 Jakarta">Alumni SMKN 1 Jakarta</option>
-                  <option value="Siswa Kelas XII SMKN 1 Jakarta">Siswa Kelas XII SMKN 1 Jakarta</option>
+                  <option value="Alumni SMKN 20 Jakarta">Alumni SMKN 20 Jakarta</option>
+                  <option value="Siswa Kelas XII SMKN 20 Jakarta">Siswa Kelas XII SMKN 20 Jakarta</option>
                   <option value="Alumni SMK Lainnya di DKI Jakarta">Alumni SMK Lainnya di DKI Jakarta</option>
                   <option value="Umum / Fresh Graduate">Umum / Fresh Graduate</option>
                 </select>

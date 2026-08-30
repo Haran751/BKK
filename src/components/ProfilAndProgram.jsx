@@ -31,7 +31,7 @@ export default function ProfilAndProgram({
                   <div className="sm:col-span-5 relative rounded-xl overflow-hidden shadow-sm aspect-[4/3] sm:aspect-square bg-slate-100">
                     <img
                       src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80"
-                      alt="Profil BKK SMKN 1 Jakarta"
+                      alt="Profil BKK SMKN 20 Jakarta"
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-bkk-navy/80 backdrop-blur-sm text-[10px] font-bold text-white uppercase">
@@ -45,7 +45,7 @@ export default function ProfilAndProgram({
                       MENGENAL BKK KAMI
                     </h3>
                     <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-4">
-                      Bursa Kerja Khusus (BKK) SMK Negeri 1 Jakarta adalah lembaga yang dibentuk untuk memberikan pelayanan informasi pasar kerja, bimbingan kejuruan, penyaluran dan penempatan tenaga kerja bagi alumni ke dunia usaha & industri.
+                      Bursa Kerja Khusus (BKK) SMK Negeri 20 Jakarta adalah lembaga yang dibentuk untuk memberikan pelayanan informasi pasar kerja, bimbingan kejuruan, penyaluran dan penempatan tenaga kerja bagi alumni ke dunia usaha & industri.
                     </p>
                   </div>
                 </div>

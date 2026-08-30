@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, Calendar, MapPin, Users, Tag } from 'lucide-react';
+import { mediaUrl, fallbackImage } from '../../services/media';
 
 export default function GalleryLightboxModal({ item, onClose }) {
   if (!item) return null;
@@ -19,7 +20,8 @@ export default function GalleryLightboxModal({ item, onClose }) {
         {/* Large Image View */}
         <div className="relative aspect-[16/10] bg-slate-900 overflow-hidden">
           <img
-            src={item.image}
+            src={mediaUrl(item.image, 'gallery') || fallbackImage}
+            onError={(event) => { event.currentTarget.src = fallbackImage; }}
             alt={item.title}
             className="w-full h-full object-cover"
           />
@@ -33,7 +35,7 @@ export default function GalleryLightboxModal({ item, onClose }) {
           <div className="flex flex-wrap items-center gap-4 text-xs text-slate-500 mb-2">
             <div className="flex items-center gap-1">
               <Calendar className="w-3.5 h-3.5 text-bkk-orange" />
-              <span>{item.date}</span>
+              <span>{item.date || (item.createdAt ? new Date(item.createdAt).toLocaleDateString('id-ID') : '-')}</span>
             </div>
             <div className="flex items-center gap-1">
               <MapPin className="w-3.5 h-3.5 text-bkk-orange" />

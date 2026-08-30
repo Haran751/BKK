@@ -1,5 +1,6 @@
 import React from 'react';
 import { X, Calendar, Clock, User, Share2, BookOpen, Bookmark, Check } from 'lucide-react';
+import { mediaUrl, fallbackImage } from '../../services/media';
 
 export default function ArticleReaderModal({ article, onClose }) {
   const [copied, setCopied] = React.useState(false);
@@ -27,7 +28,8 @@ export default function ArticleReaderModal({ article, onClose }) {
         {/* Hero Image */}
         <div className="relative aspect-[16/9] bg-slate-900 overflow-hidden">
           <img
-            src={article.image}
+            src={mediaUrl(article.thumbnail || article.image, 'articles') || fallbackImage}
+            onError={(event) => { event.currentTarget.src = fallbackImage; }}
             alt={article.title}
             className="w-full h-full object-cover"
           />
@@ -36,7 +38,7 @@ export default function ArticleReaderModal({ article, onClose }) {
           <div className="absolute bottom-4 left-6 right-6 text-white">
             <div className="flex items-center gap-2 mb-2">
               <span className="px-2.5 py-0.5 rounded bg-bkk-orange text-white text-[10px] font-black uppercase">
-                {article.badge || 'Blog Post'}
+                {article.category || article.badge || 'Blog Post'}
               </span>
               <span className="text-xs text-slate-300">{article.category}</span>
             </div>
@@ -55,7 +57,7 @@ export default function ArticleReaderModal({ article, onClose }) {
             </div>
             <div className="flex items-center gap-1.5 font-medium">
               <Clock className="w-3.5 h-3.5 text-orange-500" />
-              <span>{article.readTime}</span>
+              <span>{article.readTime || 'Artikel BKK'}</span>
             </div>
           </div>
 
@@ -71,7 +73,7 @@ export default function ArticleReaderModal({ article, onClose }) {
         {/* Content Body */}
         <div className="p-6 sm:p-8 space-y-4 text-slate-700 leading-relaxed text-xs sm:text-sm">
           <p className="text-sm sm:text-base font-semibold text-slate-900 border-l-4 border-bkk-orange pl-4 italic">
-            "{article.excerpt}"
+            "{article.excerpt || String(article.content || '').slice(0, 180)}"
           </p>
 
           <div className="prose prose-slate max-w-none text-slate-700 space-y-4 pt-2 whitespace-pre-line">
@@ -81,7 +83,7 @@ export default function ArticleReaderModal({ article, onClose }) {
 
         {/* Modal Footer */}
         <div className="sticky bottom-0 bg-white border-t border-slate-200 px-6 py-4 rounded-b-3xl flex items-center justify-between">
-          <span className="text-xs text-slate-400 font-medium">Diterbitkan oleh Tim Publikasi BKK SMKN 1 Jakarta</span>
+          <span className="text-xs text-slate-400 font-medium">Diterbitkan oleh Tim Publikasi BKK SMKN 20 Jakarta</span>
           <button
             onClick={onClose}
             className="px-5 py-2 rounded-xl bg-bkk-navy hover:bg-bkk-blue text-white font-bold text-xs uppercase"

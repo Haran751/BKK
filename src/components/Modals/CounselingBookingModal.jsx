@@ -56,7 +56,7 @@ export default function CounselingBookingModal({ onClose }) {
                 <p><strong>Tanggal:</strong> {bookingData.date}</p>
                 <p><strong>Waktu:</strong> {bookingData.timeSlot}</p>
                 <p><strong>Konselor:</strong> {bookingData.counselor}</p>
-                <p><strong>Lokasi:</strong> Ruang Konseling BKK Lantai 1 SMKN 1 Jakarta</p>
+                <p><strong>Lokasi:</strong> Ruang Konseling BKK Lantai 1 SMKN 20 Jakarta</p>
               </div>
               <p className="text-xs text-slate-500">
                 Notifikasi dan link konfirmasi telah dikirimkan ke WhatsApp Anda.

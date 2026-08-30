@@ -1,21 +1,21 @@
 export const schoolInfo = {
-  name: "SMK NEGERI 1 JAKARTA",
-  shortName: "SMKN 1 Jakarta",
+  name: "SMK NEGERI 20 JAKARTA",
+  shortName: "SMKN 20 Jakarta",
   subUnit: "BURSA KERJA KHUSUS (BKK)",
-  tagline: "Menggapai Masa Depan Cerah Bersama BKK SMK N 1 Jakarta",
+  tagline: "Menggapai Masa Depan Cerah Bersama BKK SMK N 20 Jakarta",
   address: "Jl. Budi Utomo No. 7, Ps. Baru, Kecamatan Sawah Besar, Kota Jakarta Pusat, DKI Jakarta 10710",
   phone: "+62 21 345 6789",
   whatsapp: "+62 812 3456 7890",
-  email: "bkk@smkn1jakarta.sch.id",
-  website: "www.smkn1jakarta.sch.id",
+  email: "bkk@smkn20jakarta.sch.id",
+  website: "www.smkn20jakarta.sch.id",
   accreditation: "Terakreditasi A (Unggul)",
   npsn: "20100123",
   operationalHours: "Senin - Jumat: 07.30 - 16.00 WIB",
   socials: {
-    facebook: "https://facebook.com/bkksmkn1jkt",
-    instagram: "https://instagram.com/bkksmkn1jakarta",
-    linkedin: "https://linkedin.com/company/bkk-smkn1-jakarta",
-    youtube: "https://youtube.com/@bkksmkn1jakarta"
+    facebook: "https://facebook.com/bkksmkn20jkt",
+    instagram: "https://instagram.com/smkn20jakarta",
+    linkedin: "https://linkedin.com/company/bkk-smkn20-jakarta",
+    youtube: "https://youtube.com/@bkksmkn20jakarta"
   },
   stats: {
     alumniAbsorbed: "94.8%",
@@ -34,13 +34,13 @@ export const heroSlides = [
     titleMiddle: "CERAH BERSAMA",
     highlight: "BKK SMK N 1 JAKARTA",
     titleSuffix: "",
-    subtitle: "Pintu gerbang emas menuju karir impian di industri nasional & multinasional terkemuka bagi siswa serta alumni SMK Negeri 1 Jakarta.",
+    subtitle: "Pintu gerbang emas menuju karir impian di industri nasional & multinasional terkemuka bagi siswa serta alumni SMK Negeri 20 Jakarta.",
     ctaText: "LIHAT LOWONGAN",
     ctaAction: "jobs",
     secondaryCtaText: "Daftar Job Fair 2024",
     secondaryCtaAction: "jobfair",
     image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80",
-    imageCaption: "Alumni & Siswa SMKN 1 Jakarta",
+    imageCaption: "Alumni & Siswa SMKN 20 Jakarta",
     imageTag: "Generasi Siap Kerja",
     verifiedText: "Tersertifikasi BNSP",
     stat1: { icon: "Award", value: "94.8% Lulusan", label: "Langsung Bekerja" },
@@ -48,7 +48,7 @@ export const heroSlides = [
   },
   {
     id: 2,
-    badge: "Event Akbar Tahunan BKK SMKN 1 Jakarta",
+    badge: "Event Akbar Tahunan BKK SMKN 20 Jakarta",
     highlightLabel: "HIGHLIGHT EVENT",
     titlePrefix: "BURSA KERJA & REKRUTMEN MASSAL",
     titleMiddle: "TERBUKA UNTUK ALUMNI & UMUM",
@@ -88,7 +88,7 @@ export const heroSlides = [
   },
   {
     id: 4,
-    badge: "Layanan Persiapan Kerja & BMW SMKN 1 Jakarta",
+    badge: "Layanan Persiapan Kerja & BMW SMKN 20 Jakarta",
     highlightLabel: "HIGHLIGHT PROGRAM",
     titlePrefix: "BIMBINGAN KARIR INTENSIF &",
     titleMiddle: "SIMULASI PSIKOTES HRD",
@@ -146,11 +146,11 @@ export const recruitmentEvents = [
     id: "job-fair-2024",
     type: "JOB FAIR 2024",
     badge: "EVENT AKBAR",
-    title: "JOB FAIR AKBAR SMKN 1 JAKARTA 2024",
+    title: "JOB FAIR AKBAR SMKN 20 JAKARTA 2024",
     date: "22 - 24 Oktober 2024",
     time: "08.00 - 15.30 WIB",
-    location: "Aula & Sport Hall SMKN 1 Jakarta",
-    description: "Bursa kerja resmi SMKN 1 Jakarta menghadirkan 45+ stand booth perusahaan BUMN, PMA, dan Swasta Nasional dengan total 1.200+ kuota lowongan fresh graduate.",
+    location: "Aula & Sport Hall SMKN 20 Jakarta",
+    description: "Bursa kerja resmi SMKN 20 Jakarta menghadirkan 45+ stand booth perusahaan BUMN, PMA, dan Swasta Nasional dengan total 1.200+ kuota lowongan fresh graduate.",
     companiesCount: "45+ Perusahaan",
     quota: "1.200+ Lowongan",
     registrationStatus: "Pendaftaran Dibuka",
@@ -166,7 +166,7 @@ export const recruitmentEvents = [
     date: "Setiap Selasa & Kamis (Pekan Berjalan)",
     time: "08.30 - 14.00 WIB",
     location: "Ruang Assessment BKK Lantai 2",
-    description: "Proses rekrutmen langsung khusus alumni SMKN 1 Jakarta untuk formasi Teknisi Jaringan, Operator Produksi, dan Administrasi Operasional.",
+    description: "Proses rekrutmen langsung khusus alumni SMKN 20 Jakarta untuk formasi Teknisi Jaringan, Operator Produksi, dan Administrasi Operasional.",
     companiesCount: "PT Astra International & PT Telkom Indonesia",
     quota: "150 Posisi",
     registrationStatus: "Tersedia 40 Kursi",
@@ -501,7 +501,7 @@ export const galleryEvents = [
     title: "Pelatihan Soft Skill & Etika Kerja",
     category: "Pelatihan Soft Skill",
     date: "14 September 2024",
-    location: "Aula Utama SMKN 1 Jakarta",
+    location: "Aula Utama SMKN 20 Jakarta",
     description: "Workshop pembekalan mental siap kerja, komunikasi efektif, dan simulasi interview bersama HRD profesional.",
     participants: "320 Peserta",
     image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
@@ -571,7 +571,7 @@ export const galleryEvents = [
     title: "Kunjungan Industri & Campus Hiring OKK",
     category: "Job Fair & Rekrutmen",
     date: "10 Juni 2024",
-    location: "Auditorium SMKN 1 Jakarta",
+    location: "Auditorium SMKN 20 Jakarta",
     description: "Pelaksanaan psikotes dan walk-in interview gelombang 1 bersama 12 perusahaan mitra sekaligus.",
     participants: "450 Peserta",
     image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=800&q=80"
@@ -586,7 +586,7 @@ export const careerArticles = [
     badge: "Blog Post",
     date: "20 Oktober 2024",
     readTime: "4 Menit Baca",
-    author: "Tim Konseling Karir BKK SMKN 1 Jakarta",
+    author: "Tim Konseling Karir BKK SMKN 20 Jakarta",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80",
     excerpt: "Kuasai teknik menjawab pertanyaan HRD dengan metode STAR, trik memperkenalkan diri yang memikat, dan bahasa tubuh profesional saat wawancara kerja.",
     content: `
@@ -600,7 +600,7 @@ Metode STAR (Situation, Task, Action, Result) adalah formula emas yang disukai o
 - **Result**: Sebutkan hasil terukur yang berhasil Anda capai (contoh: efisiensi waktu, apresiasi pembimbing, nol cacat kerja).
 
 ### 2. Presentasi Diri yang Ringkas dan Menarik (Elevator Pitch)
-Saat diminta "Ceritakan tentang diri Anda", jangan sekadar membaca ulang CV. Mulailah dengan nama, jurusan di SMKN 1 Jakarta, kompetensi kejuruan yang Anda kuasai secara mendalam, prestasi atau pengalaman PKL yang relevan, serta alasan ketertarikan Anda terhadap posisi yang dilamar.
+Saat diminta "Ceritakan tentang diri Anda", jangan sekadar membaca ulang CV. Mulailah dengan nama, jurusan di SMKN 20 Jakarta, kompetensi kejuruan yang Anda kuasai secara mendalam, prestasi atau pengalaman PKL yang relevan, serta alasan ketertarikan Anda terhadap posisi yang dilamar.
 
 ### 3. Bahasa Tubuh & Etika Berpakaian
 - Kenakan pakaian formal yang rapi, bersih, dan sesuai standar perusahaan.
@@ -621,12 +621,12 @@ Ketika interviewer menanyakan *"Apakah ada pertanyaan untuk kami?"*, jangan menj
     readTime: "5 Menit Baca",
     author: "Redaksi Humas BKK",
     image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80",
-    excerpt: "Simak kisah inspiratif alumni SMKN 1 Jakarta yang berhasil meniti karir gemilang hingga menjadi Lead Engineer di industri multinasional berkat bimbingan BKK.",
+    excerpt: "Simak kisah inspiratif alumni SMKN 20 Jakarta yang berhasil meniti karir gemilang hingga menjadi Lead Engineer di industri multinasional berkat bimbingan BKK.",
     content: `
-Kisah sukses alumni selalu menjadi bukti nyata bahwa lulusan Sekolah Menengah Kejuruan memiliki peluang tak terbatas di dunia kerja global. Kali ini kita berbincang dengan Dimas Pratama, alumni Jurusan Teknik Otomasi Industri SMKN 1 Jakarta angkatan 2019.
+Kisah sukses alumni selalu menjadi bukti nyata bahwa lulusan Sekolah Menengah Kejuruan memiliki peluang tak terbatas di dunia kerja global. Kali ini kita berbincang dengan Dimas Pratama, alumni Jurusan Teknik Otomasi Industri SMKN 20 Jakarta angkatan 2019.
 
 ### Awal Mula yang Penuh Perjuangan
-Lahir dari keluarga sederhana di Jakarta Pusat, Dimas memiliki tekad kuat untuk langsung mandiri secara finansial setelah lulus SMK. Melalui program bimbingan karir dan sertifikasi BNSP yang difasilitasi oleh BKK SMKN 1 Jakarta, Dimas giat mengasah keterampilan teknis dan kemampuan berbahasa Inggris praktis.
+Lahir dari keluarga sederhana di Jakarta Pusat, Dimas memiliki tekad kuat untuk langsung mandiri secara finansial setelah lulus SMK. Melalui program bimbingan karir dan sertifikasi BNSP yang difasilitasi oleh BKK SMKN 20 Jakarta, Dimas giat mengasah keterampilan teknis dan kemampuan berbahasa Inggris praktis.
 
 ### Pintu Masuk Melalui Campus Hiring BKK
 Pada pertengahan semester akhir, Dimas mengikuti seleksi Campus Hiring yang diadakan BKK bekerja sama dengan perusahaan manufaktur komponen otomotif asal Jepang. Berkat portofolio proyek tugas akhir dan nilai uji kompetensi yang memuaskan, ia lolos seleksi teknisi di antara ratusan pendaftar.
@@ -634,7 +634,7 @@ Pada pertengahan semester akhir, Dimas mengikuti seleksi Campus Hiring yang diad
 ### Melangkah ke Level Internasional
 Kinerja disiplin, inovasi perbaikan mesin (Kaizen), dan kemampuan komunikasi yang baik membawanya terpilih mengikuti program transfer keahlian ke Nagoya, Jepang selama 2 tahun. Saat ini, di usia 24 tahun, Dimas telah menduduki posisi Senior Automation Specialist dengan penghasilan yang sangat membanggakan.
 
-### Pesan untuk Adik-Adik Kelas di SMKN 1 Jakarta
+### Pesan untuk Adik-Adik Kelas di SMKN 20 Jakarta
 *"Jangan pernah merasa rendah diri karena lulusan SMK. Industri sangat membutuhkan keterampilan praktis, attitude jujur, dan kemauan belajar yang tangguh. Manfaatkan seluruh fasilitas dan jaringan relasi BKK sekolah sebaik-baiknya!"* tutup Dimas.
     `
   },
@@ -668,19 +668,19 @@ Teknologi berkembang setiap bulan. Mereka yang sukses di era digital adalah mere
 
 export const bkkFaqs = [
   {
-    q: "Siapa saja yang berhak mendaftar lowongan kerja di BKK SMKN 1 Jakarta?",
-    a: "Layanan lowongan kerja BKK terbuka utama bagi seluruh siswa tingkat akhir dan alumni resmi SMKN 1 Jakarta dari semua angkatan. Beberapa event tertentu seperti Job Fair Akbar juga dibuka untuk umum dan alumni SMK sekitar."
+    q: "Siapa saja yang berhak mendaftar lowongan kerja di BKK SMKN 20 Jakarta?",
+    a: "Layanan lowongan kerja BKK terbuka utama bagi seluruh siswa tingkat akhir dan alumni resmi SMKN 20 Jakarta dari semua angkatan. Beberapa event tertentu seperti Job Fair Akbar juga dibuka untuk umum dan alumni SMK sekitar."
   },
   {
     q: "Apakah ada biaya administrasi untuk melamar atau mengikuti rekrutmen?",
-    a: "Seluruh layanan BKK SMKN 1 Jakarta adalah 100% GRATIS dan tidak dipungut biaya apapun bagi siswa dan alumni. Kami tidak pernah memungut biaya pendaftaran maupun pemotongan gaji."
+    a: "Seluruh layanan BKK SMKN 20 Jakarta adalah 100% GRATIS dan tidak dipungut biaya apapun bagi siswa dan alumni. Kami tidak pernah memungut biaya pendaftaran maupun pemotongan gaji."
   },
   {
     q: "Bagaimana cara melakukan legalisir dokumen atau pembuatan kartu kuning (AK-1)?",
-    a: "BKK SMKN 1 Jakarta bekerja sama dengan Disnakertrans DKI Jakarta menyediakan layanan loket pembuatan AK-1 kolektif menjelang kelulusan serta layanan legalisir berkas ijazah/transkrip terpadu di sekretariat BKK."
+    a: "BKK SMKN 20 Jakarta bekerja sama dengan Disnakertrans DKI Jakarta menyediakan layanan loket pembuatan AK-1 kolektif menjelang kelulusan serta layanan legalisir berkas ijazah/transkrip terpadu di sekretariat BKK."
   },
   {
     q: "Bagaimana perusahaan dapat bermitra dan memasang lowongan di BKK?",
-    a: "Perusahaan atau Mitra DUDI dapat mengirimkan informasi lowongan kerja resmi melalui email humas BKK (bkk@smkn1jakarta.sch.id) atau WhatsApp resmi. Tim Administrator BKK akan memverifikasi dan mempublikasikannya langsung ke portal."
+    a: "Perusahaan atau Mitra DUDI dapat mengirimkan informasi lowongan kerja resmi melalui email humas BKK (bkk@smkn20jakarta.sch.id) atau WhatsApp resmi. Tim Administrator BKK akan memverifikasi dan mempublikasikannya langsung ke portal."
   }
 ];

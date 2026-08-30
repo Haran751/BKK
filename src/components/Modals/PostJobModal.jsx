@@ -76,7 +76,7 @@ export default function PostJobModal({ onClose, onJobPosted }) {
             Publikasikan Lowongan Kerja Baru
           </h3>
           <p className="text-xs text-slate-200 mt-1">
-            Lowongan yang diinput akan langsung terbit dan dapat dilihat oleh seluruh siswa & alumni SMKN 1 Jakarta
+            Lowongan yang diinput akan langsung terbit dan dapat dilihat oleh seluruh siswa & alumni SMKN 20 Jakarta
           </p>
         </div>
 

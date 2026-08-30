@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { Search, MapPin, Briefcase, Clock, DollarSign, ChevronRight, Filter, Building2, Send, PlusCircle, ShieldCheck } from 'lucide-react';
-import { jobVacancies } from '../data/mockData';
 import CompanyLogo from './CompanyLogo';
+import { mediaUrl, fallbackImage } from '../services/media';
 
 export default function LowonganKerja({
-  jobs = jobVacancies,
+  jobs = [],
   currentUser,
   onSelectJob,
   onApplyJob,
@@ -25,19 +25,26 @@ export default function LowonganKerja({
   ];
 
   const filteredJobs = useMemo(() => {
-    return jobs.filter(job => {
+    return (jobs || []).filter(job => {
+      if (!job) return false;
       const q = (searchQuery || internalSearch).toLowerCase();
+      const compName = typeof job.company === 'string' ? job.company : (job.company?.name || '');
+      const edu = job.education || job.requirements || '';
+      const loc = job.location || '';
+      const title = job.title || '';
+
       const matchQuery = !q || 
-        job.title.toLowerCase().includes(q) || 
-        job.company.toLowerCase().includes(q) ||
-        job.education.toLowerCase().includes(q) ||
-        job.location.toLowerCase().includes(q);
+        title.toLowerCase().includes(q) || 
+        compName.toLowerCase().includes(q) ||
+        edu.toLowerCase().includes(q) ||
+        loc.toLowerCase().includes(q);
 
       const matchCategory = selectedCategory === 'all' || (() => {
-        if (selectedCategory === 'mesin') return job.education.toLowerCase().includes('mesin') || job.education.toLowerCase().includes('otomotif') || job.title.toLowerCase().includes('operator');
-        if (selectedCategory === 'it') return job.education.toLowerCase().includes('tkj') || job.education.toLowerCase().includes('rpl') || job.title.toLowerCase().includes('teknisi') || job.title.toLowerCase().includes('it');
-        if (selectedCategory === 'admin') return job.education.toLowerCase().includes('akuntansi') || job.education.toLowerCase().includes('otkp') || job.title.toLowerCase().includes('administrasi');
-        if (selectedCategory === 'listrik') return job.education.toLowerCase().includes('listrik') || job.education.toLowerCase().includes('elektro');
+        const text = (title + ' ' + edu).toLowerCase();
+        if (selectedCategory === 'mesin') return text.includes('mesin') || text.includes('otomotif') || text.includes('operator');
+        if (selectedCategory === 'it') return text.includes('tkj') || text.includes('rpl') || text.includes('teknisi') || text.includes('it') || text.includes('developer');
+        if (selectedCategory === 'admin') return text.includes('akuntansi') || text.includes('otkp') || text.includes('administrasi') || text.includes('keuangan');
+        if (selectedCategory === 'listrik') return text.includes('listrik') || text.includes('elektro');
         return true;
       })();
 
@@ -57,7 +64,7 @@ export default function LowonganKerja({
             </h2>
             <div className="w-12 h-1 bg-bkk-orange rounded-full mt-1.5"></div>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">
-              Peluang karir resmi dari mitra industri terverifikasi BKK SMKN 1 Jakarta
+              Peluang karir resmi dari mitra industri terverifikasi BKK SMKN 20 Jakarta
             </p>
           </div>
 
@@ -145,17 +152,17 @@ export default function LowonganKerja({
                     
                     {/* Logo Box matching Mockup */}
                     <div className="w-24 sm:w-28 h-16 sm:h-18 rounded-xl bg-white border border-slate-200 p-2 flex items-center justify-center shrink-0 shadow-sm group-hover:border-bkk-blue/40 transition-colors">
-                      <CompanyLogo name={job.logo} className="max-h-10 max-w-full" />
+                      {job.image ? <img src={mediaUrl(job.image, 'jobs')} alt="" onError={(event) => { event.currentTarget.src = fallbackImage; }} className="max-h-10 max-w-full object-contain" /> : <CompanyLogo name={job.company || job.company?.name} className="max-h-10 max-w-full" />}
                     </div>
 
                     {/* Job Title & Company */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <span className="px-2 py-0.5 rounded text-[10px] font-black uppercase bg-blue-50 text-bkk-blue">
-                          {job.type}
+                          {job.jobType || job.job_type || job.type || job.employmentType || 'Full Time'}
                         </span>
                         <span className="text-[11px] text-slate-400 font-medium">
-                          Batas: {job.deadline}
+                          Batas: {job.deadline ? (String(job.deadline).includes('-') ? new Date(job.deadline).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' }) : job.deadline) : 'Segera'}
                         </span>
                       </div>
 
@@ -164,7 +171,7 @@ export default function LowonganKerja({
                       </h3>
 
                       <p className="text-xs font-bold text-slate-500 mt-0.5 truncate">
-                        {job.company}
+                        {job.company?.name || (typeof job.company === 'string' ? job.company : '') || 'Mitra Industri BKK'}
                       </p>
                     </div>
 
@@ -179,11 +186,11 @@ export default function LowonganKerja({
                   <div className="mt-3.5 pt-3 border-t border-slate-100 flex flex-wrap items-center gap-y-2 gap-x-4 text-xs text-slate-600 font-medium">
                     <div className="flex items-center gap-1">
                       <MapPin className="w-3.5 h-3.5 text-bkk-orange shrink-0" />
-                      <span className="truncate max-w-[150px]">{job.location}</span>
+                      <span className="truncate max-w-[150px]">{job.location || 'Jakarta & Sekitarnya'}</span>
                     </div>
                     <div className="flex items-center gap-1 font-bold text-emerald-700">
                       <DollarSign className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                      <span>{job.salary}</span>
+                      <span>{job.salary || (job.salaryMin ? `Rp ${Number(job.salaryMin).toLocaleString('id-ID')} - Rp ${Number(job.salaryMax || job.salaryMin).toLocaleString('id-ID')}` : 'Gaji Kompetitif')}</span>
                     </div>
                   </div>
 
@@ -192,7 +199,7 @@ export default function LowonganKerja({
                 {/* Bottom Action Buttons: DETAIL & LAMAR */}
                 <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-3">
                   <span className="text-[11px] text-orange-600 font-bold bg-orange-50 px-2.5 py-1 rounded-md">
-                    {job.openPositions} Kuota Formasi
+                    {(job.openPositions ?? 1)} Kuota Formasi
                   </span>
 
                   <div className="flex items-center gap-2">

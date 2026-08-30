@@ -80,7 +80,7 @@ export default function Footer({ onOpenTracerModal, onOpenAboutModal, onOpenAuth
                   <div className="w-6 h-6 rounded bg-blue-600/30 group-hover:bg-blue-600 flex items-center justify-center transition-colors">
                     <FacebookIcon className="w-3.5 h-3.5 text-blue-400 group-hover:text-white" />
                   </div>
-                  <span>Facebook: @bkk.smkn1jkt</span>
+                  <span>Facebook: @bkk.smkn20jkt</span>
                 </a>
               </li>
               <li>
@@ -88,7 +88,7 @@ export default function Footer({ onOpenTracerModal, onOpenAboutModal, onOpenAuth
                   <div className="w-6 h-6 rounded bg-pink-600/30 group-hover:bg-pink-600 flex items-center justify-center transition-colors">
                     <InstagramIcon className="w-3.5 h-3.5 text-pink-400 group-hover:text-white" />
                   </div>
-                  <span>Instagram: @bkksmkn1jakarta</span>
+                  <span>Instagram: @smkn20jktofficial</span>
                 </a>
               </li>
               <li>
@@ -96,7 +96,7 @@ export default function Footer({ onOpenTracerModal, onOpenAboutModal, onOpenAuth
                   <div className="w-6 h-6 rounded bg-blue-700/30 group-hover:bg-blue-700 flex items-center justify-center transition-colors">
                     <LinkedinIcon className="w-3.5 h-3.5 text-blue-400 group-hover:text-white" />
                   </div>
-                  <span>LinkedIn: BKK SMKN 1 Jakarta</span>
+                  <span>LinkedIn: BKK SMKN 20 Jakarta</span>
                 </a>
               </li>
               <li>
@@ -155,7 +155,7 @@ export default function Footer({ onOpenTracerModal, onOpenAboutModal, onOpenAuth
             </div>
             <div className="space-y-2 text-slate-400">
               <p className="text-xs">
-                Sekolah Menengah Kejuruan Pusat Keunggulan (SMK PK) Bidang Bisnis & Manajemen, Akuntansi, Rekayasa Perangkat Lunak, dan Desain Komunikasi Visual.
+                Sekolah Menengah Kejuruan dengan Pusat Keunggulan Bidang Bisnis & Manajemen, Akuntansi, Rekayasa Perangkat Lunak, Akutansi, dan Manajemen Logistik
               </p>
               <div className="pt-2 flex flex-col gap-1 text-[11px]">
                 <div className="flex items-center gap-1 text-emerald-400 font-bold">
@@ -173,7 +173,7 @@ export default function Footer({ onOpenTracerModal, onOpenAboutModal, onOpenAuth
         {/* Bottom Copyright */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
-            <p>© 2024 Bursa Kerja Khusus (BKK) SMK Negeri 1 Jakarta. All rights reserved.</p>
+            <p>© 2026 Bursa Kerja Khusus (BKK) SMK Negeri 20 Jakarta. All rights reserved.</p>
           </div>
           <div className="flex flex-wrap items-center gap-4 text-slate-400">
             <button onClick={onOpenAboutModal} className="hover:text-white transition-colors">Visi & Misi</button>

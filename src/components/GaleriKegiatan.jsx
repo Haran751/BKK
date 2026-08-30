@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Image as ImageIcon, ZoomIn, Calendar, MapPin } from 'lucide-react';
-import { galleryEvents } from '../data/mockData';
+import { mediaUrl, fallbackImage } from '../services/media';
 
-export default function GaleriKegiatan({ onOpenLightbox }) {
+export default function GaleriKegiatan({ gallery = [], onOpenLightbox }) {
   const [activeFilter, setActiveFilter] = useState('all');
 
   const filters = [
@@ -13,8 +13,8 @@ export default function GaleriKegiatan({ onOpenLightbox }) {
   ];
 
   const filteredGallery = activeFilter === 'all'
-    ? galleryEvents
-    : galleryEvents.filter(item => item.category === activeFilter);
+    ? gallery
+    : gallery.filter(item => item.category === activeFilter);
 
   return (
     <section id="galeri" className="py-12 md:py-16 bg-[#f8fafc]">
@@ -61,7 +61,8 @@ export default function GaleriKegiatan({ onOpenLightbox }) {
               {/* Photo Container with overlay */}
               <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
                 <img
-                  src={item.image}
+                  src={mediaUrl(item.image, 'gallery') || fallbackImage}
+                  onError={(event) => { event.currentTarget.src = fallbackImage; }}
                   alt={item.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   loading="lazy"
@@ -86,7 +87,7 @@ export default function GaleriKegiatan({ onOpenLightbox }) {
                   {item.title}
                 </h3>
                 <p className="text-[10px] text-slate-400 font-medium mt-0.5">
-                  {item.date}
+                  {item.eventDate || item.date || item.createdAt ? new Date(item.eventDate || item.date || item.createdAt).toLocaleDateString('id-ID') : '-'}
                 </p>
               </div>
             </div>

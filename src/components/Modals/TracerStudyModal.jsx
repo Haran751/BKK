@@ -7,7 +7,7 @@ export default function TracerStudyModal({ onClose }) {
     fullName: '',
     nisn: '',
     graduationYear: '2024',
-    major: 'Teknik Komputer & Jaringan (TKJ)',
+    major: 'AKUTANSI(AK)',
     status: 'bekerja', // 'bekerja' | 'kuliah' | 'wirausaha' | 'mencari'
     workplaceName: 'PT Telkom Indonesia',
     position: 'Teknisi Jaringan Fiber Optik',
@@ -39,7 +39,7 @@ export default function TracerStudyModal({ onClose }) {
             Kuesioner Resmi Kemendikbudristek & Disdik
           </p>
           <h3 className="text-xl font-black text-white font-display mt-0.5">
-            Tracer Study Alumni SMKN 1 Jakarta
+            Tracer Study Alumni SMKN 20 Jakarta
           </h3>
           <p className="text-xs text-slate-200 mt-1">
             Pendataan keterserapan lulusan (Bekerja, Melanjutkan Kuliah, Wirausaha)
@@ -57,7 +57,7 @@ export default function TracerStudyModal({ onClose }) {
                 Data Tracer Study Berhasil Disimpan!
               </h3>
               <p className="text-xs text-slate-600 max-w-sm mx-auto">
-                Terima kasih atas partisipasi Anda dalam membantu pemetaan mutu dan keterserapan lulusan SMK Negeri 1 Jakarta.
+                Terima kasih atas partisipasi Anda dalam membantu pemetaan mutu dan keterserapan lulusan SMK Negeri 20 Jakarta.
               </p>
 
               {/* Statistics Breakdown Indicator */}
@@ -138,19 +138,19 @@ export default function TracerStudyModal({ onClose }) {
               </div>
 
               <div>
-                <label className="font-bold text-slate-700 block mb-1">Jurusan di SMKN 1 Jakarta *</label>
+                <label className="font-bold text-slate-700 block mb-1">Jurusan di SMKN 20 Jakarta *</label>
                 <select
                   value={formData.major}
                   onChange={(e) => setFormData({ ...formData, major: e.target.value })}
                   className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bkk-blue/20 focus:border-bkk-blue bg-white"
                 >
-                  <option value="Teknik Komputer & Jaringan (TKJ)">Teknik Komputer & Jaringan (TKJ)</option>
-                  <option value="Rekayasa Perangkat Lunak (RPL)">Rekayasa Perangkat Lunak (RPL)</option>
-                  <option value="Teknik Kendaraan Ringan (TKRO)">Teknik Kendaraan Ringan (TKRO)</option>
-                  <option value="Teknik Pemesinan (TPM)">Teknik Pemesinan (TPM)</option>
-                  <option value="Teknik Ketenagalistrikan (TITL)">Teknik Ketenagalistrikan (TITL)</option>
-                  <option value="Akuntansi & Keuangan Lembaga (AKL)">Akuntansi & Keuangan Lembaga (AKL)</option>
-                  <option value="Otomatisasi Perkantoran (OTKP)">Otomatisasi Perkantoran (OTKP)</option>
+                  <option value="AKUTANSI(AK)">AKUTANSI(AK)</option>
+                  <option value="LAYANAN PERBANKAN SYARIAH(LPS)">LAYANAN PERBANKAN SYARIAH(LPS)</option>
+                  <option value="MANAJEMEN PERKANTORAN(MP)">MANAJEMEN PERKANTORAN(MP)</option>
+                  <option value="MANAJEMEN LOGISTIK(ML)">MANAJEMEN LOGISTIK(ML)</option>
+                  <option value="BISNIS DIGITAL(BD)">BISNIS DIGITAL(BD)</option>
+                  <option value="BISNIS RETAIL(BR)">BISNIS RETAIL(BR)</option>
+                  <option value="REKAYASA PERANGKAT LUNAK(RPL)">REKAYASA PERANGKAT LUNAK(RPL)</option>
                 </select>
               </div>
 
@@ -238,7 +238,7 @@ export default function TracerStudyModal({ onClose }) {
               )}
 
               <div>
-                <label className="font-bold text-slate-700 block mb-1">Saran / Masukan untuk BKK SMKN 1 Jakarta</label>
+                <label className="font-bold text-slate-700 block mb-1">Saran / Masukan untuk BKK SMKN 20 Jakarta</label>
                 <textarea
                   rows={2}
                   value={formData.feedback}

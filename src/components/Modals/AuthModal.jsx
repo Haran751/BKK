@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Lock, Mail, ShieldCheck, Sparkles, Key, AlertCircle } from 'lucide-react';
+import { adminApi } from '../../api/adminApi';
 
 export default function AuthModal({ onClose, onLoginSuccess }) {
   const [formData, setFormData] = useState({
@@ -7,29 +8,50 @@ export default function AuthModal({ onClose, onLoginSuccess }) {
     password: ''
   });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
       setError('Harap masukkan email/username dan password administrator.');
       return;
     }
 
-    const userObj = {
-      name: formData.email.includes('@') ? formData.email.split('@')[0] : 'Administrator BKK',
-      email: formData.email,
-      role: 'Administrator BKK'
-    };
-    if (onLoginSuccess) onLoginSuccess(userObj);
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await adminApi.login(formData.email, formData.password);
+      const token = response?.data?.data?.token || response?.data?.token;
+      const user = response?.data?.data?.admin || response?.data?.admin || {
+        name: formData.email.includes('@') ? formData.email.split('@')[0] : 'Administrator BKK',
+        email: formData.email,
+        role: 'Administrator BKK'
+      };
+
+      if (!token) {
+        throw new Error('Respons login dari server tidak valid.');
+      }
+
+      sessionStorage.setItem('bkk_admin_token', token);
+      if (onLoginSuccess) onLoginSuccess(user);
+      if (onClose) onClose();
+    } catch (requestError) {
+      const message = requestError?.response?.data?.message || requestError?.message || 'Login administrator gagal.';
+      setError(message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleDemoAdminLogin = () => {
     const userObj = {
       name: 'Drs. H. Hendra, M.Pd (Ketua BKK)',
-      email: 'admin.bkk@smkn1jakarta.sch.id',
+      email: 'admin.bkk@smkn20jakarta.sch.id',
       role: 'Administrator BKK'
     };
     if (onLoginSuccess) onLoginSuccess(userObj);
+    if (onClose) onClose();
   };
 
   return (
@@ -57,7 +79,7 @@ export default function AuthModal({ onClose, onLoginSuccess }) {
             Login Pengelola BKK
           </h3>
           <p className="text-xs text-slate-200 mt-1">
-            Masuk untuk mempublikasikan lowongan kerja baru dan mengelola data BKK SMKN 1 Jakarta
+            Masuk untuk mempublikasikan lowongan kerja baru dan mengelola data BKK SMKN 20 Jakarta
           </p>
         </div>
 
@@ -100,7 +122,7 @@ export default function AuthModal({ onClose, onLoginSuccess }) {
                 <input
                   type="text"
                   required
-                  placeholder="admin.bkk@smkn1jakarta.sch.id"
+                  placeholder="admin.bkk@smkn20jakarta.sch.id"
                   value={formData.email}
                   onChange={(e) => { setFormData({ ...formData, email: e.target.value }); setError(''); }}
                   className="w-full pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-bkk-blue/20 focus:border-bkk-blue text-xs"
@@ -126,17 +148,18 @@ export default function AuthModal({ onClose, onLoginSuccess }) {
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-[#133e75] hover:bg-[#0c2b53] text-white font-extrabold text-xs uppercase tracking-wider shadow-button-blue transition-all flex items-center justify-center gap-2"
+                disabled={loading}
+                className="w-full py-3 rounded-xl bg-[#133e75] hover:bg-[#0c2b53] text-white font-extrabold text-xs uppercase tracking-wider shadow-button-blue transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 <ShieldCheck className="w-4 h-4" />
-                <span>Masuk sebagai Administrator</span>
+                <span>{loading ? 'Memproses Login...' : 'Masuk sebagai Administrator'}</span>
               </button>
             </div>
           </form>
 
           <div className="mt-4 text-center">
             <p className="text-[11px] text-slate-400">
-              Halaman ini terproteksi khusus untuk dewan pengelola BKK SMKN 1 Jakarta.
+              Halaman ini terproteksi khusus untuk dewan pengelola BKK SMKN 20 Jakarta.
             </p>
           </div>
         </div>

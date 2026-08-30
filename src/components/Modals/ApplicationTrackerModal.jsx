@@ -1,76 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import { X, Search, Briefcase, CheckCircle2, Clock, AlertCircle, Building2, ChevronRight, FileText } from 'lucide-react';
+import React, { useState } from 'react';
+import { X, Search, Briefcase, CheckCircle2, Clock } from 'lucide-react';
+import { trackApplication } from '../../services/applicationService';
+
+const statusLabels = {
+  baru: 'Baru',
+  ditinjau: 'Ditinjau',
+  lolos: 'Lolos Seleksi',
+  tidak_lolos: 'Tidak Lolos',
+  diterima: 'Diterima'
+};
 
 export default function ApplicationTrackerModal({ onClose }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [applications, setApplications] = useState([]);
   const [searched, setSearched] = useState(false);
   const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    try {
-      const stored = JSON.parse(localStorage.getItem('bkk_applications') || '[]');
-      if (stored.length === 0) {
-        // Default sample records if none
-        const initial = [
-          {
-            id: 'BKK-APPLY-884210',
-            jobTitle: 'TEKNISI JARINGAN - PT TELKOM',
-            company: 'PT Telkom Indonesia (Persero) Tbk',
-            applicantName: 'Ahmad Rizky Pratama',
-            nisn: '0054891230',
-            appliedAt: '22 Oktober 2024',
-            status: 'Wawancara User',
-            timeline: [
-              { status: 'Lamaran Terkirim', date: '22 Okt 2024', done: true },
-              { status: 'Seleksi Berkas & Administrasi', date: '23 Okt 2024 (Lolos)', done: true },
-              { status: 'Tes Psikotes & Teknis', date: '24 Okt 2024 (Lolos)', done: true },
-              { status: 'Wawancara User HRD', date: '28 Okt 2024 (Dijadwalkan)', current: true, done: false },
-              { status: 'Offering & Kontrak Kerja', date: 'Tahap Akhir', done: false }
-            ]
-          },
-          {
-            id: 'BKK-APPLY-731920',
-            jobTitle: 'OPERATOR PRODUKSI - ASTRA AGRO',
-            company: 'PT Astra Agro Lestari Tbk',
-            applicantName: 'Ahmad Rizky Pratama',
-            nisn: '0054891230',
-            appliedAt: '18 Oktober 2024',
-            status: 'Seleksi Berkas',
-            timeline: [
-              { status: 'Lamaran Terkirim', date: '18 Okt 2024', done: true },
-              { status: 'Seleksi Berkas Administrasi', date: 'Sedang Berjalan', current: true, done: false },
-              { status: 'Psikotes Mandiri', date: 'Menunggu Jadwal', done: false },
-              { status: 'Medical Check Up (MCU)', date: 'Menunggu', done: false }
-            ]
-          }
-        ];
-        localStorage.setItem('bkk_applications', JSON.stringify(initial));
-        setApplications(initial);
-        setResults(initial);
-      } else {
-        setApplications(stored);
-        setResults(stored);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
-
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
     setSearched(true);
-    if (!searchQuery.trim()) {
-      setResults(applications);
+    const query = searchQuery.trim();
+    if (!query) {
+      setResults([]);
+      setApplications([]);
       return;
     }
-    const q = searchQuery.toLowerCase().trim();
-    const filtered = applications.filter(a =>
-      a.id.toLowerCase().includes(q) ||
-      (a.nisn && a.nisn.toLowerCase().includes(q)) ||
-      (a.applicantName && a.applicantName.toLowerCase().includes(q))
-    );
-    setResults(filtered);
+    setIsLoading(true);
+    try {
+      const response = await trackApplication({ nisn: query });
+      const payload = response.data?.data || [];
+      setResults(payload);
+      setApplications(payload);
+    } catch (error) {
+      console.error('TRACK APPLICATION ERROR:', error);
+      setResults([]);
+      setApplications([]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -121,11 +89,13 @@ export default function ApplicationTrackerModal({ onClose }) {
 
         {/* Results List */}
         <div className="p-6 space-y-5">
-          {results.length === 0 ? (
+          {isLoading ? (
+            <div className="text-center py-8 text-xs text-slate-500">Mencari data lamaran...</div>
+          ) : results.length === 0 ? (
             <div className="text-center py-8">
               <Briefcase className="w-10 h-10 text-slate-300 mx-auto mb-2" />
               <p className="font-bold text-slate-700 text-sm">Tidak ada riwayat lamaran ditemukan</p>
-              <p className="text-xs text-slate-500 mt-1">Pastikan kode lamaran atau nomor NISN yang dimasukkan sesuai.</p>
+              <p className="text-xs text-slate-500 mt-1">Pastikan nomor NISN yang dimasukkan sesuai dengan data lamaran Anda.</p>
             </div>
           ) : (
             results.map((app) => (
@@ -146,13 +116,12 @@ export default function ApplicationTrackerModal({ onClose }) {
                   
                   <div className="text-left sm:text-right">
                     <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-bkk-blue text-xs font-black uppercase">
-                      {app.status || 'Diproses'}
+                      {statusLabels[app.status] || app.status || 'Diproses'}
                     </span>
-                    <p className="text-[10px] text-slate-400 mt-1">Diajukan: {app.appliedAt}</p>
+                    <p className="text-[10px] text-slate-400 mt-1">Diajukan: {new Date(app.appliedAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                   </div>
                 </div>
 
-                {/* Progress Steps */}
                 {app.timeline && (
                   <div>
                     <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-3">
@@ -172,7 +141,7 @@ export default function ApplicationTrackerModal({ onClose }) {
                             <span className={step.done ? 'font-bold text-slate-800' : step.current ? 'font-black text-orange-600' : 'text-slate-400'}>
                               {step.status}
                             </span>
-                            <span className="text-[11px] text-slate-400">{step.date}</span>
+                            <span className="text-[11px] text-slate-400">{step.date || (step.done ? 'Selesai' : step.current ? 'Sedang berjalan' : 'Menunggu')}</span>
                           </div>
                         </div>
                       ))}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ProfilAndProgram from './components/ProfilAndProgram';
@@ -22,15 +22,23 @@ import PostJobModal from './components/Modals/PostJobModal';
 import AboutBkkModal from './components/Modals/AboutBkkModal';
 import ApplicationTrackerModal from './components/Modals/ApplicationTrackerModal';
 import Toast from './components/Toast';
-import { jobVacancies } from './data/mockData';
+import AdminDashboard from './components/AdminDashboard';
+import api from './services/api';
 
 import { MessageCircle, ArrowUp } from 'lucide-react';
 
 export default function App() {
+  if (window.location.pathname.startsWith('/admin')) {
+    return <AdminDashboard />;
+  }
+
   const [activeSection, setActiveSection] = useState('beranda');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
-  const [jobsList, setJobsList] = useState(jobVacancies);
+  const [jobsList, setJobsList] = useState([]);
+  const [companies, setCompanies] = useState([]);
+  const [gallery, setGallery] = useState([]);
+  const [articles, setArticles] = useState([]);
   const [toastMessage, setToastMessage] = useState(null);
 
   // Modal States
@@ -45,6 +53,22 @@ export default function App() {
   const [isPostJobOpen, setIsPostJobOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isTrackerOpen, setIsTrackerOpen] = useState(false);
+
+  useEffect(() => {
+    Promise.all([api.get('/jobs'), api.get('/companies'), api.get('/galleries'), api.get('/articles')])
+      .then(([jobsResponse, companiesResponse, galleryResponse, articlesResponse]) => {
+        setJobsList(jobsResponse.data.data || []);
+        setCompanies(companiesResponse.data.data || []);
+        setGallery(galleryResponse.data.data || []);
+        setArticles(articlesResponse.data.data || []);
+      })
+      .catch(() => {
+        setJobsList([]);
+        setCompanies([]);
+        setGallery([]);
+        setArticles([]);
+      });
+  }, []);
 
   const showToast = (msg, type = 'success') => {
     setToastMessage({ message: msg, type });
@@ -141,15 +165,17 @@ export default function App() {
         />
 
         {/* Mitra Perusahaan (Carousels & Logotypes) */}
-        <MitraPerusahaan />
+        <MitraPerusahaan companies={companies} />
 
         {/* Galeri Kegiatan (8 Photo Grid & Lightbox) */}
         <GaleriKegiatan
+          gallery={gallery}
           onOpenLightbox={(item) => setSelectedGalleryItem(item)}
         />
 
         {/* Artikel Karir & Info */}
         <ArtikelKarir
+          articles={articles}
           onOpenArticle={(article) => setSelectedArticle(article)}
         />
       </main>

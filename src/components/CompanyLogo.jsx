@@ -1,7 +1,19 @@
 import React from 'react';
+import { mediaUrl, fallbackImage } from '../services/media';
 
 export default function CompanyLogo({ name, className = "h-8 object-contain" }) {
-  const normalized = (name || '').toLowerCase();
+  const companyData = typeof name === 'object' && name !== null ? name : null;
+  const companyName = companyData?.fullName || companyData?.name || companyData?.companyName || '';
+  const logoValue = companyData?.logo || companyData?.image || '';
+  const logoStr = companyData ? (logoValue || companyName || '') : String(name || '');
+  const normalized = logoStr.toLowerCase();
+
+  if (companyData && logoValue) {
+    return <img src={mediaUrl(logoValue, 'companies') || fallbackImage} alt={companyName || 'Logo perusahaan'} onError={(event) => { event.currentTarget.src = fallbackImage; }} className={`object-contain ${className}`} />;
+  }
+  if (/^(https?:\/\/|uploads\/|companies\/)/i.test(logoStr)) {
+    return <img src={mediaUrl(logoStr, 'companies') || fallbackImage} alt="Logo perusahaan" onError={(event) => { event.currentTarget.src = fallbackImage; }} className={`object-contain ${className}`} />;
+  }
 
   if (normalized.includes('toyota')) {
     return (
@@ -120,7 +132,7 @@ export default function CompanyLogo({ name, className = "h-8 object-contain" }) 
   // Fallback badge
   return (
     <div className={`inline-flex items-center px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-slate-800 font-bold text-sm ${className}`}>
-      {name}
+      {logoStr || 'BKK'}
     </div>
   );
 }

@@ -14,7 +14,7 @@ export default function KegiatanRekrutmen({ onOpenEventModal }) {
           </h2>
           <div className="w-12 h-1 bg-bkk-orange rounded-full mt-1.5"></div>
           <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Agenda bursa kerja, campus hiring, dan walk-in interview terdekat di SMKN 1 Jakarta
+            Agenda bursa kerja, campus hiring, dan walk-in interview terdekat di SMKN 20 Jakarta
           </p>
         </div>
 
@@ -36,7 +36,7 @@ export default function KegiatanRekrutmen({ onOpenEventModal }) {
                     <Building className="w-4 h-4 text-white" />
                   </div>
                   <span className="text-xs font-extrabold uppercase tracking-widest text-slate-200">
-                    BKK SMKN 1 JAKARTA
+                    BKK SMKN 20 JAKARTA
                   </span>
                 </div>
                 <span className="px-3 py-1 rounded-full bg-bkk-orange text-white text-[11px] font-black uppercase tracking-wider animate-pulse">
@@ -63,7 +63,7 @@ export default function KegiatanRekrutmen({ onOpenEventModal }) {
                     </div>
                     <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/15 w-fit">
                       <MapPin className="w-4 h-4 text-orange-400 shrink-0" />
-                      <span>Tempat: SMKN 1 Jakarta Pusat</span>
+                      <span>Tempat: SMKN 20 Jakarta Pusat</span>
                     </div>
                   </div>
                 </div>
@@ -73,7 +73,7 @@ export default function KegiatanRekrutmen({ onOpenEventModal }) {
                   <div className="w-full max-w-[200px] sm:max-w-none rounded-2xl overflow-hidden border-2 border-white/30 shadow-lg aspect-[4/3] sm:aspect-square">
                     <img
                       src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80"
-                      alt="Job Fair SMKN 1 Jakarta"
+                      alt="Job Fair SMKN 20 Jakarta"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>

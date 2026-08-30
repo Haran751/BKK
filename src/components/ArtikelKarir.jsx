@@ -1,8 +1,8 @@
 import React from 'react';
 import { BookOpen, Clock, ArrowRight, Sparkles, UserCheck } from 'lucide-react';
-import { careerArticles } from '../data/mockData';
+import { mediaUrl, fallbackImage } from '../services/media';
 
-export default function ArtikelKarir({ onOpenArticle }) {
+export default function ArtikelKarir({ articles = [], onOpenArticle }) {
   return (
     <section id="artikel" className="py-12 md:py-16 bg-white border-t border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,7 +22,7 @@ export default function ArtikelKarir({ onOpenArticle }) {
 
         {/* 3 Article Cards Grid matching Mockup */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {careerArticles.map((article) => (
+          {articles.map((article) => (
             <article
               key={article.id}
               onClick={() => onOpenArticle(article)}
@@ -32,14 +32,15 @@ export default function ArtikelKarir({ onOpenArticle }) {
                 {/* Article Thumbnail Image */}
                 <div className="relative aspect-[16/10] bg-slate-100 overflow-hidden">
                   <img
-                    src={article.image}
+                    src={mediaUrl(article.thumbnail || article.image, 'articles') || fallbackImage}
+                    onError={(event) => { event.currentTarget.src = fallbackImage; }}
                     alt={article.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
                   />
                   {/* Blog Post Badge matching Mockup */}
                   <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-white/90 backdrop-blur-md text-[10px] font-black text-bkk-navy uppercase tracking-wider shadow-sm">
-                    {article.badge}
+                    {article.category || 'Artikel'}
                   </div>
                 </div>
 
@@ -50,7 +51,7 @@ export default function ArtikelKarir({ onOpenArticle }) {
                     <span>•</span>
                     <div className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />
-                      <span>{article.readTime}</span>
+                      <span>{article.author || 'Tim BKK'}</span>
                     </div>
                   </div>
 
@@ -61,14 +62,14 @@ export default function ArtikelKarir({ onOpenArticle }) {
 
                   {/* Excerpt */}
                   <p className="mt-2 text-xs text-slate-600 leading-relaxed line-clamp-3">
-                    {article.excerpt}
+                    {article.excerpt || String(article.content || '').slice(0, 150)}
                   </p>
                 </div>
               </div>
 
               {/* Bottom Footer / Read More */}
               <div className="px-5 pb-5 pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-bkk-orange group-hover:text-bkk-orangeHover">
-                <span className="text-[11px] text-slate-400 font-medium">{article.date}</span>
+                <span className="text-[11px] text-slate-400 font-medium">{article.publishedAt ? new Date(article.publishedAt).toLocaleDateString('id-ID') : new Date(article.createdAt).toLocaleDateString('id-ID')}</span>
                 <div className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                   <span>Baca Selengkapnya</span>
                   <ArrowRight className="w-3.5 h-3.5" />
