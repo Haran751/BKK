@@ -160,7 +160,7 @@ export default function JobDetailModal({ job, onClose, onApply }) {
         <div className="sticky bottom-0 bg-white border-t border-slate-200 px-6 sm:px-8 py-4 rounded-b-3xl flex flex-wrap items-center justify-between gap-3 shadow-lg">
           <div className="flex items-center gap-2 text-xs text-slate-500">
             <ShieldCheck className="w-4 h-4 text-emerald-500" />
-            <span>Terverifikasi Resmi Tim BKK SMKN 1</span>
+            <span>Terverifikasi Resmi Tim BKK SMKN 20</span>
           </div>
 
           <div className="flex items-center gap-3">

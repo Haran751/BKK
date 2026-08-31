@@ -389,7 +389,7 @@ function CrudPage({ type, data = [], setData, companies = [] }) {
                   <td>
                     {type === 'jobs'
                       ? `${item.company?.name || (typeof item.company === 'string' ? item.company : '') || '-'} · ${item.location || '-'}`
-                      : item.website || item.author || item.category || 'BKK SMKN 1'}
+                      : item.website || item.author || item.category || 'BKK SMKN 20'}
                   </td>
                   <td>
                     <button className={`admin-status ${statusClass(item.status)}`} onClick={() => toggle(item.id)}>

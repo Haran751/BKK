@@ -426,6 +426,10 @@ function adminCrud(resource) {
       data.status = data.status || 'active';
     }
 
+    if (resource === 'gallery') {
+      data.event_date = typeof data.event_date === 'string' && data.event_date.trim() ? data.event_date.trim() : null;
+    }
+
     if (req.file) {
       const fieldKey = resource === 'jobs' ? 'image' : resource === 'companies' ? 'logo' : resource === 'gallery' ? 'image' : 'thumbnail';
       data[fieldKey] = path.relative(path.resolve(__dirname, 'uploads'), req.file.path).replace(/\\/g, '/');

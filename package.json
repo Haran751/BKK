@@ -1,5 +1,5 @@
 {
-  "name": "bkk-smkn1-jakarta",
+  "name": "bkk-smkn20-jakarta",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -8,12 +8,13 @@
     "build": "vite build",
     "preview": "vite preview",
     "server": "node server/server.js",
-    "server:dev": "node --watch server/server.js"
+    "server:dev": "node --watch server/server.js",
+    "seed:admin": "node server/seeders/admin.js"
   },
   "dependencies": {
     "axios": "^1.20.0",
     "clsx": "^2.1.1",
-    "lucide-react": "^1.16.0",
+    "lucide-react": "^1.37.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.5.4"

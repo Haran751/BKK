@@ -104,7 +104,7 @@ export default function Footer({ onOpenTracerModal, onOpenAboutModal, onOpenAuth
                   <div className="w-6 h-6 rounded bg-red-600/30 group-hover:bg-red-600 flex items-center justify-center transition-colors">
                     <YoutubeIcon className="w-3.5 h-3.5 text-red-400 group-hover:text-white" />
                   </div>
-                  <span>YouTube: BKK SMKN 1 Official</span>
+                  <span>YouTube: BKK SMKN 20 Jakarta</span>
                 </a>
               </li>
             </ul>

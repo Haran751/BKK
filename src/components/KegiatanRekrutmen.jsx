@@ -121,7 +121,7 @@ export default function KegiatanRekrutmen({ onOpenEventModal }) {
               </h3>
 
               <p className="mt-2 text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
-                Rekrutmen dan seleksi tes langsung di sekolah oleh mitra industri terkemuka khusus siswa & alumni SMKN 1.
+                Rekrutmen dan seleksi tes langsung di sekolah oleh mitra industri terkemuka khusus siswa & alumni SMKN 20.
               </p>
 
               {/* Company Logo Badges Box */}
