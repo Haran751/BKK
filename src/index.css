@@ -42,6 +42,21 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+/* Hero background photo crossfade */
+.hero-bg-img {
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 1200ms ease-out, transform 9000ms linear;
+}
+.hero-bg-img.active {
+  opacity: 1;
+  transform: scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-img {
+    transform: none;
+  }
+}
 
 /* Hide scrollbar for tabs/horizontal scrolling */
 .no-scrollbar::-webkit-scrollbar {
@@ -65,8 +80,10 @@
   -webkit-backdrop-filter: blur(12px);
 }
 
+:root { --ink: #142033; --muted: #718096; --line: #e7ebf1; --paper: #fff; --blue: #17457d; --orange: #f26b38; }
+
 /* Admin workspace */
-.admin-app { --ink: #142033; --muted: #718096; --line: #e7ebf1; --paper: #fff; --blue: #17457d; --orange: #f26b38; min-height: 100vh; display: flex; background: #f6f8fb; color: var(--ink); font-family: 'Plus Jakarta Sans', sans-serif; }
+.admin-app { min-height: 100vh; display: flex; background: #f6f8fb; color: var(--ink); font-family: 'Plus Jakarta Sans', sans-serif; }
 .admin-sidebar { width: 256px; min-height: 100vh; padding: 27px 15px 18px; display: flex; flex-direction: column; background: #102d55; color: #dbe7f6; position: fixed; z-index: 40; }
 .admin-sidebar-brand, .admin-top-user, .admin-sidebar-foot, .admin-workspace, .admin-person, .admin-list-row, .admin-activity-item, .admin-company-avatar, .admin-toolbar, .admin-toolbar-actions, .admin-panel-title, .settings-profile { display: flex; align-items: center; }
 .admin-sidebar-brand { padding: 0 13px 29px; gap: 9px; font-weight: 900; font-size: 19px; color: #fff; letter-spacing: -.5px; }.admin-sidebar-brand svg { color: #f68550; }.admin-sidebar-brand span span, .admin-brand-mark span span { color: #f68550; }.admin-sidebar-brand button { display: none; margin-left: auto; color: #b8c8dd; background: none; }
